@@ -1,0 +1,145 @@
+CREATE TABLE student_details (
+    student_id int NOT NULL PRIMARY KEY ,
+    student_name varchar(20) NOT NULL,
+    student_department varchar(30) NOT NULL,
+    student_year int NOT NULL
+);
+
+CREATE TABLE student_libraries (
+    library_id int NOT NULL PRIMARY KEY ,
+    student_id int NOT NULL,
+    book_title varchar(35) NOT NULL,
+    issue_date date NOT NULL,
+    return_date date NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES student_details(student_id)
+);
+
+CREATE TABLE student_fees (
+    fee_id int NOT NULL PRIMARY KEY ,
+    student_id int NOT NULL,
+    amount int,
+    due_date date NOT NULL,
+    paid_date date NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES student_details(student_id)
+);
+
+CREATE TABLE student_gatepass (
+    gatepass_id int NOT NULL PRIMARY KEY ,
+    student_id int NOT NULL,
+    intime time NOT NULL,
+    outtime time NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES student_details(student_id)
+);
+
+CREATE TABLE department_details(
+   student_id int NOT NULL,
+   staff_id int NOT NULL,
+   staff_name varchar(20) NOT NULL,
+   department varchar(30) NOT NULL,
+   FOREIGN KEY (student_id) REFERENCES student_details(student_id)
+);
+
+INSERT INTO student_details (student_name, student_department, student_year)  
+VALUES 
+('Hema', 'Information Technology', 3),
+('Srimathi', 'Computer Science', 2),
+('Sajitha', 'Artificial Intelligence', 1),
+('Swetha', 'Information Technology', 4),
+('Rohini', 'Cyber Security', 4),
+('Surya', 'Mechanical', 2),
+('Karthiga', 'Information Technology', 3),
+('Arul', 'Computer Science', 1),
+('Thilaga', 'Nursing', 2),
+('Karthika', 'Cyber Security', 4),
+('Banu', 'Information Technology', 1),
+('Janarthanan', 'Agri', 3),
+('Sabari', 'Computer Science', 2),
+('Anu', 'B.A. English', 4),
+('Sowmiya', 'Information Technology', 3);
+
+INSERT INTO student_libraries (student_id, book_title, issue_date, return_date)
+VALUES 
+(1, 'Database Systems', '2024-08-01', '2024-08-10'),
+(2, 'Operating Systems', '2024-04-03', '2024-05-01'),
+(3, 'Cyber Security', '2024-02-01', '2024-06-10'),
+(4, 'Mathematics', '2024-08-03', '2024-08-30'),
+(5, 'Professional English', '2024-10-10', '2024-10-22'),
+(6, 'Data Structures', '2024-08-01', '2024-08-10'),
+(7, 'Physics', '2024-04-15', '2024-05-10'),
+(8, 'Cloud Computing', '2024-02-08', '2024-03-10'),
+(9, 'Software Testing', '2024-08-19', '2024-09-19'),
+(10, 'Chemistry', '2024-10-01', '2024-11-10'),
+(11, 'Urban Agriculture', '2024-03-07', '2024-06-16'),
+(12, 'Operating Systems', '2024-08-21', '2024-09-22'),
+(13, 'Data Structures', '2024-05-25', '2024-06-30'),
+(14, 'Chemistry', '2024-08-01', '2024-10-10'),
+(15, 'Distributed Computing', '2024-08-31', '2024-12-10');
+
+INSERT INTO student_fees (student_id, amount, due_date, paid_date) 
+VALUES 
+(1, 20444, '2024-08-01', '2024-10-10'),
+(2, 30000, '2024-02-12', '2024-03-15'),
+(3, 40500, '2024-03-25', '2024-04-10'),
+(4, 34600, '2024-10-14', '2024-11-22'),
+(5, 25500, '2024-07-13', '2024-08-10'),
+(6, 40000, '2024-08-04', '2024-09-12'),
+(7, 20400, '2024-05-07', '2024-06-10'),
+(8, 15900, '2024-08-01', '2024-10-10'),
+(9, 10000, '2024-03-27', '2024-04-29'),
+(10, 70000, '2024-06-17', '2024-09-27'),
+(11, 100000, '2024-08-01', '2024-10-10'),
+(12, 20600, '2024-08-01', '2024-10-10'),
+(13, 12400, '2024-03-16', '2024-06-02'),
+(14, 60000, '2024-07-12', '2024-08-19'),
+(15, 50000, '2024-12-25', '2025-01-08');
+
+INSERT INTO student_gatepass (student_id, intime, outtime)
+VALUES 
+(1, '07:45:30', '17:06:20'),
+(2, '08:30:00', '09:50:20'),
+(3, '05:10:30', '06:50:28'),
+(4, '06:50:00', '09:30:29'),
+(5, '03:50:09', '07:50:27'),
+(6, '12:45:00', '16:12:22'),
+(7, '11:04:22', '12:50:00'),
+(8, '14:00:00', '17:00:20'),
+(9, '06:40:54', '16:00:27'),
+(10, '19:08:00', '23:06:20'),
+(11, '10:26:30', '09:48:00'),
+(12, '05:34:30', '07:55:27'),
+(13, '23:46:00', '05:50:42'),
+(14, '14:07:00', '08:09:20'),
+(15, '09:50:56', '16:23:20');
+
+INSERT INTO department_details(student_id, staff_id, staff_name, department)
+VALUES
+(1, 1, 'Krishnan', 'IT'),
+(2, 2, 'Mani', 'CSC'),
+(3, 3, 'John', 'AIDS'),
+(4, 4, 'Banu', 'MECH'),
+(5, 5, 'Veni', 'IT'),
+(6, 6, 'Jai', 'AGRI'),
+(7, 7, 'Ragini', 'BME'),
+(8, 8, 'Raju', 'CSC'),
+(9, 9, 'Sridhar', 'PHARMACY'),
+(10, 10, 'Kannan', 'AIDS'),
+(11, 11, 'Kanmani', 'IT'),
+(12, 12, 'Thilagavathi', 'MECH'),
+(13, 13, 'Pagavathi', 'CSC'),
+(14, 14, 'Madhu', 'BME'),
+(15, 15, 'Ramya', 'NURSING');
+
+-- Query to select the details for a specific student ('Srimathi')
+SELECT 
+    sd.student_id,sd.student_name,sd.student_department,sd.student_year,
+    sl.library_id,sl.book_title,sl.issue_date,sl.return_date,
+    sf.fee_id,sf.amount,sf.due_date,sf.paid_date,
+    sg.gatepass_id,sg.intime,sg.outtime,
+    dd.staff_id,dd.staff_name,dd.department
+FROM
+    student_details sd 
+    LEFT JOIN student_libraries sl ON sd.student_id = sl.student_id
+    LEFT JOIN student_fees sf ON sd.student_id = sf.student_id
+    LEFT JOIN student_gatepass sg ON sd.student_id = sg.student_id
+	LEFT JOIN department_details dd ON sd.student_id = dd.student_id
+    WHERE sd.student_name = 'Srimathi';
